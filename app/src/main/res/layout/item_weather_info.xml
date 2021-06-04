@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="weatherInfo"
+            type="com.osung.idustest.domain.entity.WeatherEntity" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/localName"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@{weatherInfo.title}"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/line1"
+            tools:text="Seoul"/>
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/color_list_divide"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.12" />
+
+        <ImageView
+            android:id="@+id/todayWeatherImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/description_image_weather_today"
+            app:loadImage="@{weatherInfo.todayWeather.weatherStateAbbr}"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/line1" />
+
+        <TextView
+            android:id="@+id/todayWeatherState"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textColor="@color/black"
+            android:text="@{weatherInfo.todayWeather.weatherStateName}"
+            app:layout_constraintTop_toTopOf="@id/todayWeatherImage"
+            app:layout_constraintBottom_toTopOf="@id/todayWeatherTemp"
+            app:layout_constraintStart_toEndOf="@id/todayWeatherImage"
+            app:layout_constraintEnd_toStartOf="@id/line2"
+            app:layout_constraintVertical_chainStyle="spread_inside"/>
+
+        <TextView
+            android:id="@+id/todayWeatherTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            android:text="@{@string/format_temp((int)weatherInfo.todayWeather.theTemp)}"
+            app:layout_constraintTop_toBottomOf="@id/todayWeatherState"
+            app:layout_constraintBottom_toBottomOf="@id/todayWeatherImage"
+            app:layout_constraintStart_toEndOf="@id/todayWeatherImage"
+            app:layout_constraintEnd_toStartOf="@id/todayWeatherHumidity"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintHorizontal_bias="0" />
+
+        <TextView
+            android:id="@+id/todayWeatherHumidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="@{@string/format_humidity(weatherInfo.todayWeather.humidity)}"
+            app:layout_constraintStart_toEndOf="@id/todayWeatherTemp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBaseline_toBaselineOf="@id/todayWeatherTemp"/>
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/color_list_divide"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/line1"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+            android:id="@+id/tomorrowWeatherImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:layout_margin="10dp"
+            android:contentDescription="@string/description_image_weather_tomorrow"
+            app:layout_constraintDimensionRatio="1:1"
+            app:loadImage="@{weatherInfo.tomorrowWeather.weatherStateAbbr}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/line2"/>
+
+        <TextView
+            android:id="@+id/tomorrowWeatherState"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textColor="@color/black"
+            android:text="@{weatherInfo.tomorrowWeather.weatherStateName}"
+            app:layout_constraintTop_toTopOf="@id/tomorrowWeatherImage"
+            app:layout_constraintBottom_toTopOf="@id/tomorrowWeatherTemp"
+            app:layout_constraintStart_toEndOf="@id/tomorrowWeatherImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_chainStyle="spread_inside"/>
+
+        <TextView
+            android:id="@+id/tomorrowWeatherTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            android:text="@{@string/format_temp((int)weatherInfo.tomorrowWeather.theTemp)}"
+            app:layout_constraintTop_toBottomOf="@id/tomorrowWeatherState"
+            app:layout_constraintBottom_toBottomOf="@id/tomorrowWeatherImage"
+            app:layout_constraintStart_toEndOf="@id/tomorrowWeatherImage"
+            app:layout_constraintEnd_toStartOf="@id/tomorrowWeatherHumidity"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintHorizontal_bias="0"/>
+
+        <TextView
+            android:id="@+id/tomorrowWeatherHumidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="@{@string/format_humidity(weatherInfo.tomorrowWeather.humidity)}"
+            app:layout_constraintStart_toEndOf="@id/tomorrowWeatherTemp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBaseline_toBaselineOf="@id/tomorrowWeatherTemp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
