@@ -1,1 +1,2 @@
-# search_weather
+# 날씨 조회  
+> 개발 : 최오성
